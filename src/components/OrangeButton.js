@@ -8,5 +8,9 @@ export default function OrangeButton() {
   OrangeButton.drawCircle(350, 300, 20);
   OrangeButton.endFill();
 
+  // make button interactive
+  OrangeButton.interactive = true;
+  OrangeButton.buttonMode = true;
+
   return OrangeButton;
 }

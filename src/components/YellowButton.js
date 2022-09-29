@@ -8,5 +8,9 @@ export default function YellowButton() {
   YellowButton.drawCircle(275, 300, 20);
   YellowButton.endFill();
 
+  // make button interactive
+  YellowButton.interactive = true;
+  YellowButton.buttonMode = true;
+
   return YellowButton;
 }

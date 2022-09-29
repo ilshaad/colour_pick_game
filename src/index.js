@@ -1,8 +1,8 @@
-import { Application } from "pixi.js";
+import { Application, Text } from "pixi.js";
 // import TimeField from "./components/TimeField.js";
 import pxObjectClass from "./scripts/pxObjectsClass";
 // import gameContainer from "./containers/gameContainer.js";
-import resultContainer from "./containers/resultContainer.js";
+// import resultContainer from "./containers/resultContainer.js";
 import gameLogicClass from "./scripts/gameLogicClass.js";
 
 // inialize pixi
@@ -25,9 +25,11 @@ export const pxObj = new pxObjectClass();
 app.stage.addChild(pxObj.gameContainer);
 
 // result container page
-app.stage.addChild(resultContainer());
+app.stage.addChild(pxObj.resultContainer);
+// app.stage.addChild(resultContainer());
 
 pxObj.gameContainer.visible = true;
+pxObj.resultContainer.visible = false;
 
 // time remaining content
 pxObj.gameContainer.addChild(pxObj.timeField);
@@ -48,7 +50,13 @@ pxObj.gameContainer.addChild(pxObj.yellowButton);
 pxObj.gameContainer.addChild(pxObj.orangeButton);
 
 // click event handler
-pxObj.redButton.on("pointerdown", function () {
+pxObj.redButton.on("pointerdown", buttonHandler);
+pxObj.blueButton.on("pointerdown", buttonHandler);
+pxObj.greenButton.on("pointerdown", buttonHandler);
+pxObj.yellowButton.on("pointerdown", buttonHandler);
+pxObj.orangeButton.on("pointerdown", buttonHandler);
+
+function buttonHandler() {
   // begin 20 second countdown
   gameLogic.beginGameCountdown();
   console.log("iK pointer down button");
@@ -58,9 +66,34 @@ pxObj.redButton.on("pointerdown", function () {
 
   // 2 second game round for each colour
   gameLogic.twoSecondRandomColourCircle();
-});
+}
 
 // gameContainer.ticker.add(function () {
 //   gameLogic.timeRemaining += 1;
 // });
 // TimeField(gameLogic.timeRemaining);
+
+// result score
+export function resultScore() {
+  const resultText = new Text(gameLogic.score);
+  resultText.x = 100;
+  resultText.y = 100;
+  pxObj.resultContainer.addChild(resultText);
+}
+
+// result replay button
+const replayButton = new Text("replay again!");
+replayButton.x = 100;
+replayButton.y = 200;
+replayButton.interactive = true;
+replayButton.buttonMode = true;
+pxObj.resultContainer.addChild(replayButton);
+
+replayButton.on("pointerdown", playAgain);
+
+function playAgain() {
+  gameLogic.resetGameLogic();
+
+  pxObj.gameContainer.visible = true;
+  pxObj.resultContainer.visible = false;
+}

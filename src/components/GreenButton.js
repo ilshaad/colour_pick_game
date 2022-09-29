@@ -8,5 +8,9 @@ export default function GreenButton() {
   GreenButton.drawCircle(200, 300, 20);
   GreenButton.endFill();
 
+  // make button interactive
+  GreenButton.interactive = true;
+  GreenButton.buttonMode = true;
+
   return GreenButton;
 }

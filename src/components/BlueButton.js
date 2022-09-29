@@ -8,5 +8,9 @@ export default function BlueButton() {
   blueButton.drawCircle(125, 300, 20);
   blueButton.endFill();
 
+  // make button interactive
+  blueButton.interactive = true;
+  blueButton.buttonMode = true;
+
   return blueButton;
 }
