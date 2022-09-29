@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "handlebars": "^4.7.7",
+    "pixi-timer": "^1.0.1",
     "pixi.js": "^6.5.4"
   }
 }
